@@ -77,14 +77,14 @@
                 
                 media_layer {
 // -----------------------------------------------------------------------------------------
-// |  |      |      |       |       |  |   |  |          |        |       |       |  |
-// |  | LGUI | LALT | LCTRL | LSHFT |  |   |  | PREVIOUS | VOLDN  | VOLUP | NEXT  |  |
-// |  |      |      |       |       |  |   |  |          | PGDOWN | BRIDN | BRIUP |  |
+// |  |      |      |       |       |  |   |  |          |  PLAY  | PAUSE |      |  |
+// |  | LGUI | LALT | LCTRL | LSHFT |  |   |  | PREVIOUS | VOLDN  | VOLUP | NEXT |  |
+// |  |      |      |       |       |  |   |  |          | BRIDN  | BRIUP |      |  |
 //                  |   X   |       |  |   |  |          |        |
                         bindings = <
-   &none &none    &none    &none     &none     &none   &none &none          &none        &none        &none        &none   
-   &none &kp LGUI &kp LALT &kp LCTRL &kp LSHFT &none   &none &kp C_PREVIOUS &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT   &none
-   &none &none    &none    &none     &none     &none   &none &none          &none        &kp C_BRI_DN &kp C_BRI_UP &none  
+   &none &none    &none    &none     &none     &none   &none &none          &kp C_PLAY   &kp C_PAUSE  &none      &none   
+   &none &kp LGUI &kp LALT &kp LCTRL &kp LSHFT &none   &none &kp C_PREVIOUS &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT &none
+   &none &none    &none    &none     &none     &none   &none &none          &kp C_BRI_DN &kp C_BRI_UP &none      &none
                            &none     &none     &none   &none &none          &none
                         >;
                 };               
