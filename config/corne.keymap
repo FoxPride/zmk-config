@@ -8,6 +8,12 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
+#define PRV_TAB   &kp LC(LS(TAB)) 
+#define NXT_TAB   &kp LC(TAB)
+#define COPY_WIN  &kp LC(C) 
+#define PASTE_WIN &kp LC(P)
+#define UNDO_WIN  &kp LC(Z)
+
 #define WIN_ENG 0
 //#define WIN_RU  1
 //#define MAC_ENG 2
@@ -92,11 +98,11 @@
                 navigation_layer {
                         bindings = <
                 //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-                //   |          │  ESC     │          │ PREV TAB │ NEXT TAB │          │                         │  PGUP    │  HOME    │  ↑       │  END     │  CAPS    │          │
-                        &none      &kp ESC    &none &kp LC(LS(TAB)) &kp LC(TAB) &none                              &kp PG_UP  &kp HOME    &kp UP     &kp END   &kp CAPS    &none
+                //   |          │  ESC     │  UNDO    │ PREV TAB │ NEXT TAB │  COPY    │                         │  PGUP    │  HOME    │  ↑       │  END     │  CAPS    │          │
+                        &none      &kp ESC   UNDO_WIN   PRV_TAB    NXT_TAB    COPY_WIN                             &kp PG_UP  &kp HOME    &kp UP     &kp END   &kp CAPS    &none
                 //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   |          │  GUI     │  ALT     │  CTRL    │  SHIFT   │          │                         │  PGDOWN  │  ←       │  ↓       │  →       │          │          │
-                        &none     &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT   &none                               &kp PG_DN  &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
+                //   |          │  GUI     │  ALT     │  CTRL    │  SHIFT   │  PASTE   │                         │  PGDOWN  │  ←       │  ↓       │  →       │          │          │
+                        &none     &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT  PASTE_WIN                            &kp PG_DN  &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
                 //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
                 //   |          │  BT 0    │  BT 1    │  BT 2    │  BT 3    │ BT CLEAR │                         │  INSERT  │  PTSCRN  │  APP     │  PAUSE   │          │          |
                         &none &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                        &kp INS  &kp PSCRN &kp K_APP &kp PAUSE_BREAK &none     &none
