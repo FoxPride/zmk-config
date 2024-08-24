@@ -11,7 +11,7 @@
 #define PRV_TAB   &kp LC(LS(TAB)) 
 #define NXT_TAB   &kp LC(TAB)
 #define COPY_WIN  &kp LC(C) 
-#define PASTE_WIN &kp LC(P)
+#define PASTE_WIN &kp LC(V)
 #define UNDO_WIN  &kp LC(Z)
 
 #define WIN_ENG 0
