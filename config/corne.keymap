@@ -19,17 +19,17 @@
 //#define MAC_ENG 2
 //#define MAC_RU  3
 //#define NAV     4
-//#define GAME    5
-//#define GAME_FN 6
+//#define GME     5
+//#define GFN     6
 //#define CLC     7
 //#define SYM     8
 //#define FUN     9
-#define NAV     1
-#define GAME    2
-#define GAME_FN 3
-#define CLC     4
-#define SYM     5
-#define FUN     6
+#define NAV 1
+#define GME 2 
+#define GFN 3
+#define CLC 4
+#define SYM 5
+#define FUN 6
 
 &sk {
     quick-release;
@@ -72,7 +72,7 @@
                         &none &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                        &kp INS  &kp PSCRN &kp K_APP &kp PAUSE_BREAK &none     &none
                 //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
                 //                                               │  GAME    │  X       │          │   │  SHIFT   │  BkSPC   │  DEL     │
-                                                                   &tog GAME   &none      &none          &trans   &kp BSPC    &kp DEL
+                                                                   &to GME     &none      &none          &trans   &kp BSPC    &kp DEL
                 //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
                         >;
                 };                
@@ -89,13 +89,13 @@
                 //   |          │  ESC     │  Z       │  X       │  C       │  V       │                         │          │          │          │          │          │          |
                         &none      &kp ESC    &kp Z      &kp X      &kp C      &kp V                                &none      &none      &none      &none      &none      &none
                 //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
-                //                                               │  CTRL    │  SPACE   │ GAME_FN  │   │   BASE   │  SPACE   │  PTSCRN  │
-                                                                   &kp LCTRL  &kp SPACE &mo GAME_FN     &tog GAME  &kp SPACE  &kp PSCRN
+                //                                               │  CTRL    │  SPACE   │ GAME FN  │   │   BASE   │  SPACE   │  PTSCRN  │
+                                                                   &kp LCTRL  &kp SPACE  &mo GFN       &to WIN_ENG &kp SPACE  &kp PSCRN
                 //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
                         >;
                 };
 
-                game_fn_layer {
+                gfn_layer {
                         bindings = <
                 //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
                 //   |          │  O       │  5       │  6       │  7       │  8       │                         │          │          │          │          │          │          │
