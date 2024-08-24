@@ -8,11 +8,22 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-#define DEFAULT 0
-#define NAV     1
-#define CLC     2
-#define SYM     3
-#define FUN     4
+#define WIN_ENG 0
+//#define WIN_RU  1
+//#define MAC_ENG 2
+//#define MAC_RU  3
+//#define GAME    4
+//#define GAME_FN 5
+//#define NAV     6
+//#define CLC     7
+//#define SYM     8
+//#define FUN     9
+#define GAME    1
+#define GAME_FN 2
+#define NAV     3
+#define CLC     4
+#define SYM     5
+#define FUN     6
 
 &sk {
     quick-release;
@@ -42,6 +53,42 @@
                         >;
                 };
 
+                game_layer {
+                        bindings = <
+                //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+                //   |          │  TAB     │  Q       │  W       │  E       │  R       │                         │          │          │  ↑       │          │          │          │
+                        &none      &kp TAB    &kp Q      &kp W      &kp E      &kp R                                &none      &none      &kp UP     &none      &none      &none
+                //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+                //   |          │  SHIFT   │  A       │  S       │  D       │  F       │                         │          │  ←       │  ↓       │  →       │          │          │
+                        &none    &kp LSHIFT   &kp A      &kp S      &kp D      &kp F                                &none     &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
+                //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+                //   |          │  ESC     │  Z       │  X       │  C       │  V       │                         │          │          │          │          │          │          |
+                        &none      &kp ESC    &kp Z      &kp X      &kp C      &kp V                                &none      &none      &none      &none      &none      &none
+                //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
+                //                                               │  CTRL    │  SPACE   │ GAME_FN  │   │   BASE   │  SPACE   │  PTSCRN  │
+                                                                   &kp LCTRL  &kp SPACE &mo GAME_FN    &to WIN_ENG &kp SPACE  &kp PSCRN
+                //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+                        >;
+                };
+
+                game_fn_layer {
+                        bindings = <
+                //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+                //   |          │  O       │  5       │  6       │  7       │  8       │                         │          │          │          │          │          │          │
+                        &none      &kp B      &kp L      &kp D      &kp C      &kp V                                &none      &none      &none      &none      &none      &none
+                //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+                //   |          │  L       │  1       │  2       │  3       │  4       │                         │          │          │          │          │          │          │
+                        &none      &kp N      &kp R      &kp T      &kp S      &kp G                                &none      &none      &none      &none      &none      &none
+                //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+                //   |          │  G       │  J       │  I       │  M       │  T       │                         │          │          │          │          │          │          |
+                        &none      &kp X      &kp Q      &kp M      &kp W      &kp Z                                &none      &none      &none      &none      &none      &none
+                //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
+                //                                               │  ENTER   │          │  X       │   │          │          │          │
+                                                                   &kp ENTER   &none      &none          &none      &none      &none
+                //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+                        >;
+                };                                
+
                 navigation_layer {
                         bindings = <
                 //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
@@ -51,11 +98,11 @@
                 //   |          │  GUI     │  ALT     │  CTRL    │  SHIFT   │          │                         │  PGDOWN  │  ←       │  ↓       │  →       │          │          │
                         &none     &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT   &none                               &kp PG_DN  &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
                 //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   |          │  BT 0    │  BT 1    │  BT 2    │  BT 3    │ BT CLEAR │                         │  INSERT  │  PSCRN   │  APP     │  PAUSE   │          │          |
+                //   |          │  BT 0    │  BT 1    │  BT 2    │  BT 3    │ BT CLEAR │                         │  INSERT  │  PTSCRN  │  APP     │  PAUSE   │          │          |
                         &none &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                        &kp INS  &kp PSCRN &kp K_APP &kp PAUSE_BREAK &none     &none
                 //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
-                //                                               │          │  X       │          │   │  SHIFT   │  BkSPC   │  DEL     │
-                                                                    &none      &none      &none          &trans   &kp BSPC    &kp DEL
+                //                                               │  GAME    │  X       │          │   │  SHIFT   │  BkSPC   │  DEL     │
+                                                                   &to GAME    &none      &none          &trans   &kp BSPC    &kp DEL
                 //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
                         >;
                 };
