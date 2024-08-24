@@ -108,7 +108,7 @@
                         &none &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                        &kp INS  &kp PSCRN &kp K_APP &kp PAUSE_BREAK &none     &none
                 //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
                 //                                               │  GAME    │  X       │          │   │  SHIFT   │  BkSPC   │  DEL     │
-                                                                   &to GAME    &none      &none          &trans   &kp BSPC    &kp DEL
+                                                                   &tog GAME   &none      &none          &trans   &kp BSPC    &kp DEL
                 //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
                         >;
                 };
