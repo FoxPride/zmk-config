@@ -81,13 +81,13 @@
                         bindings = <
                 //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
                 //   |          │  TAB     │  Q       │  W       │  E       │  R       │                         │          │          │  ↑       │          │          │          │
-                        &none      &kp TAB    &kp Q      &kp W      &kp E      &kp R                                &none      &none      &kp UP     &none      &none      &none
+                        &none      &kp TAB    &kp Q      &kp W      &kp E      &kp R                                &tog GFN      &none      &kp UP     &none      &none      &none
                 //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
                 //   |          │  SHIFT   │  A       │  S       │  D       │  F       │                         │          │  ←       │  ↓       │  →       │          │          │
-                        &none    &kp LSHIFT   &kp A      &kp S      &kp D      &kp F                                &none     &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
+                        &none    &kp LSHIFT   &kp A      &kp S      &kp D      &kp F                                &lt GFN SPACE     &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
                 //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
                 //   |          │  ESC     │  Z       │  X       │  C       │  V       │                         │          │          │          │          │          │          |
-                        &none      &kp ESC    &kp Z      &kp X      &kp C      &kp V                                &none      &none      &none      &none      &none      &none
+                        &none      &kp ESC    &kp Z      &kp X      &kp C      &kp V                                &sl GFN    &none      &none      &none      &none      &none
                 //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
                 //                                               │  CTRL    │  SPACE   │ GAME FN  │   │   BASE   │  SPACE   │  PTSCRN  │
                                                                    &kp LCTRL  &kp SPACE  &mo GFN       &to WIN_ENG &kp SPACE  &kp PSCRN
@@ -108,7 +108,7 @@
                         &none      &kp X      &kp Q      &kp M      &kp W      &kp Z                                &none      &none      &none      &none      &none      &none
                 //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
                 //                                               │  ENTER   │          │  X       │   │          │          │          │
-                                                                   &kp ENTER   &none      &none          &none      &none      &none
+                                                                   &kp ENTER   &tog GFN      &none          &none      &none      &none
                 //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
                         >;
                 };       
