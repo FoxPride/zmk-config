@@ -14,16 +14,16 @@
 #define PASTE_WIN &kp LC(V)
 #define UNDO_WIN  &kp LC(Z)
 
-#define WIN_ENG 0
-//#define WIN_RU  1
-//#define MAC_ENG 2
-//#define MAC_RU  3
-//#define NAV     4
-//#define GME     5
-//#define GFN     6
-//#define CLC     7
-//#define SYM     8
-//#define FUN     9
+#define WEN 0
+//#define WRU 1
+//#define MEN 2
+//#define MRU 3
+//#define NAV 4
+//#define GME 5
+//#define GFN 6
+//#define CLC 7
+//#define SYM 8
+//#define FUN 9
 #define NAV 1
 #define GME 2 
 #define GFN 3
@@ -81,16 +81,16 @@
                         bindings = <
                 //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
                 //   |          │  TAB     │  Q       │  W       │  E       │  R       │                         │          │          │  ↑       │          │          │          │
-                        &none      &kp TAB    &kp Q      &kp W      &kp E      &kp R                                &tog GFN      &none      &kp UP     &none      &none      &none
+                        &none      &kp TAB    &kp Q      &kp W      &kp E      &kp R                                &none      &none      &kp UP     &none      &none      &none
                 //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
                 //   |          │  SHIFT   │  A       │  S       │  D       │  F       │                         │          │  ←       │  ↓       │  →       │          │          │
-                        &none    &kp LSHIFT   &kp A      &kp S      &kp D      &kp F                                &lt GFN SPACE     &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
+                        &none    &kp LSHIFT   &kp A      &kp S      &kp D      &kp F                                &none     &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
                 //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
                 //   |          │  ESC     │  Z       │  X       │  C       │  V       │                         │          │          │          │          │          │          |
-                        &none      &kp ESC    &kp Z      &kp X      &kp C      &kp V                                &sl GFN    &none      &none      &none      &none      &none
+                        &none      &kp ESC    &kp Z      &kp X      &kp C      &kp V                                &none      &none      &none      &none      &none      &none
                 //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
                 //                                               │  CTRL    │  SPACE   │ GAME FN  │   │   BASE   │  SPACE   │  PTSCRN  │
-                                                                   &kp LCTRL  &kp SPACE  &mo GFN       &to WIN_ENG &kp SPACE  &kp PSCRN
+                                                                   &kp LCTRL  &kp SPACE  &mo GFN         &to WEN   &kp SPACE  &kp PSCRN
                 //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
                         >;
                 };
@@ -99,16 +99,16 @@
                         bindings = <
                 //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
                 //   |          │  O       │  5       │  6       │  7       │  8       │                         │          │          │          │          │          │          │
-                        &none      &kp B      &kp L      &kp D      &kp C      &kp V                                &none      &none      &none      &none      &none      &none
+                        &none      &kp O      &kp N5     &kp N6     &kp N7     &kp N8                               &none      &none      &none      &none      &none      &none
                 //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
                 //   |          │  L       │  1       │  2       │  3       │  4       │                         │          │          │          │          │          │          │
-                        &none      &kp N      &kp R      &kp T      &kp S      &kp G                                &none      &none      &none      &none      &none      &none
+                        &none      &kp L      &kp N1     &kp N2     &kp N3     &kp N4                               &none      &none      &none      &none      &none      &none
                 //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
                 //   |          │  G       │  J       │  I       │  M       │  T       │                         │          │          │          │          │          │          |
-                        &none      &kp X      &kp Q      &kp M      &kp W      &kp Z                                &none      &none      &none      &none      &none      &none
+                        &none      &kp G      &kp J      &kp I      &kp M      &kp T                                &none      &none      &none      &none      &none      &none
                 //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
                 //                                               │  ENTER   │          │  X       │   │          │          │          │
-                                                                   &kp ENTER   &tog GFN      &none          &none      &none      &none
+                                                                   &kp ENTER   &none      &none          &none      &none      &none
                 //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
                         >;
                 };       
