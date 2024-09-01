@@ -152,13 +152,13 @@
                 function_layer {
                         bindings = <
                 //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-                //   |          │  STOP    │ PREVIOUS │  PLAY    │  NEXT    │ BRIGHTUP │                         │  F12     │  F7      │  F8      │  F9      │          │          │
-                        &none    &kp C_STOP &kp C_PREV  &kp C_PP  &kp C_NEXT &kp C_BRI_UP                           &kp F12    &kp F7     &kp F8     &kp F9     &none      &none
+                //   |          │  STOP    │  PLAY    │ PREVIOUS │  NEXT    │ BRIGHTUP │                         │  F12     │  F7      │  F8      │  F9      │          │          │
+                        &none    &kp C_STOP  &kp C_PP  &kp C_PREV &kp C_NEXT &kp C_BRI_UP                           &kp F12    &kp F7     &kp F8     &kp F9     &none      &none
                 //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
                 //   |          │  GUI     │  ALT     │  CTRL    │  SHIFT   │ BRIGHTDN │                         │  F11     │  F4      │  F5      │  F6      │          │          │
                         &none     &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT &kp C_BRI_DN                           &kp F11    &kp F4     &kp F5     &kp F6     &none      &none 
                 //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   |          │          │  MUTE    │  VOL DWN │  VOL UP  │          │                         │  F10     │  F1      │  F2      │  F3      │          │          |
+                //   |          │          │  MUTE    │ VOL DWN  │  VOL UP  │          │                         │  F10     │  F1      │  F2      │  F3      │          │          |
                         &none      &none    &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &none                              &kp F10    &kp F1     &kp F2     &kp F3     &none      &none
                 //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
                 //                                               │          │          │          │   │          │          │  X       │
