@@ -13,7 +13,7 @@
 #define COPY_WIN  &kp LC(C) 
 #define PASTE_WIN &kp LC(V)
 #define UNDO_WIN  &kp LC(Z)
-#define LANG_WIN  &kp LG(SPACE)
+#define LANG_WIN  LG(SPACE)
 
 #define WEN 0 // Win EN
 #define WRU 1 // Win RU
@@ -28,222 +28,223 @@
 #define FUN 7 // Func
 
 &sk {
-    quick-release;
-    lazy;
+  quick-release;
+  lazy;
+};
+
+
+/ {
+  behaviors {
+    // Switch language or press Capslock
+    lngcpwin: lang_caps_win {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&lang WRU LANG_WIN>, <&kp CAPS>;
+      mods = <(MOD_LSFT)>;
+    };
+    // Russian letter Ё
+    lt_yo: letter_yo {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp T>, <&kp GRAVE>;
+      mods = <(MOD_LALT)>;
+    };
+    // Russian letter Щ
+    lt_sh: letter_sh {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp I>, <&kp O>;
+      mods = <(MOD_LALT)>;
+    };
+    // Russian letter Ъ
+    lt_hs: letter_hs {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp M>, <&kp RBKT>;
+      mods = <(MOD_LALT)>;
+    };
+    // Russian letter Э
+    lt_e: letter_e {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp QMARK>, <&kp SQT>;
+      mods = <(MOD_LALT)>;
+    };
+    // Russian letter Ф
+    lt_f: letter_f {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp FSLH>, <&kp A>;
+      mods = <(MOD_LALT)>;
+    };
+  };
 };
 
 / {
-    macros  {
-        // Switch language and activate layer
-        lang: lang {
-            compatible = "zmk,behavior-macro-two-param";
-            wait-ms = <0>;
-            tap-ms = <0>;
-            #binding-cells = <2>;
-            bindings
-              = <&macro_param_1to1>
-              , <&macro_tap &tog MACRO_PLACEHOLDER>
-              , <&macro_param_2to1>
-              , <&macro_tap MACRO_PLACEHOLDER>
-              ;
-        };
+  macros  {
+    // Switch language and activate layer
+    lang: lang {
+      compatible = "zmk,behavior-macro-two-param";
+      #binding-cells = <2>;
+      wait-ms = <40>;
+      tap-ms = <40>;
+      bindings
+        = <&macro_param_1to1>
+        , <&macro_tap &tog MACRO_PLACEHOLDER>
+        , <&macro_param_2to1>
+        , <&macro_tap &kp MACRO_PLACEHOLDER>
+        ;
     };
-};
-
-/ {
-    behaviors {
-        // Switch language or press Capslock
-        lngcpwin: lang_caps_win {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&lang WRU LANG_WIN>, <&kp CAPS>;
-            mods = <(MOD_LSFT)>;
-        };
-        // Russian letter Ё
-        lt_yo: letter_yo {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp T>, <&kp GRAVE>;
-            mods = <(MOD_LALT)>;
-        };
-        // Russian letter Щ
-        lt_sh: letter_sh {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp I>, <&kp O>;
-            mods = <(MOD_LALT)>;
-        };
-        // Russian letter Ъ
-        lt_hs: letter_hs {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp M>, <&kp RBKT>;
-            mods = <(MOD_LALT)>;
-        };
-        // Russian letter Э
-        lt_e: letter_e {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp QMARK>, <&kp SQT>;
-            mods = <(MOD_LALT)>;
-        };
-        // Russian letter Ф
-        lt_f: letter_f {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp FSLH>, <&kp A>;
-            mods = <(MOD_LALT)>;
-        };
-    };
+  };
 };
 
 / {        
-        keymap {
-        compatible = "zmk,keymap";
+  keymap {
+    compatible = "zmk,keymap";
 
-                //Gallium V2
-                default_layer {
-                        bindings = <
-                //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-                //   │          │  B       │  L       │  D       │  C       │  V       │                         │  J       │  F       │  O       │  U       │  ,       │          │
-                        &none      &kp B      &kp L      &kp D      &kp C      &kp V                                &kp J      &kp F      &kp O      &kp U     &kp COMMA   &none
-                //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │  N       │  R       │  T       │  S       │  G       │                         │  Y       │  H       │  A       │  E       │  I       │          │
-                        &none      &kp N      &kp R      &kp T      &kp S      &kp G                                &kp Y      &kp H      &kp A      &kp E      &kp I      &none 
-                //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │  X       │  Q       │  M       │  W       │  Z       │                         │  K       │  P       │  '       │  ;       │  .       │          │
-                        &none      &kp X      &kp Q      &kp M      &kp W      &kp Z                                &kp K      &kp P      &kp SQT    &kp SEMI   &kp DOT    &none
-                //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
-                //                                               │  TAB     │  SPACE   │  ENTER   │   │  SHIFT   │  BkSPC   │  DEL     │
-                                                                 &lt CLC TAB &lt NAV SPACE &kp ENTER  &kp LSHIFT &lt SYM BSPC &lt FUN DEL
-                //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
-                        >;
-                };
+    //Gallium V2
+    default_layer {
+      bindings = <
+        //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //   │          │  B       │  L       │  D       │  C       │  V       │                         │  J       │  F       │  O       │  U       │  ,       │          │
+                &none      &kp B      &kp L      &kp D      &kp C      &kp V                                &kp J      &kp F      &kp O      &kp U     &kp COMMA   &none
+        //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │  N       │  R       │  T       │  S       │  G       │                         │  Y       │  H       │  A       │  E       │  I       │          │
+                &none      &kp N      &kp R      &kp T      &kp S      &kp G                                &kp Y      &kp H      &kp A      &kp E      &kp I      &none 
+        //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │  X       │  Q       │  M       │  W       │  Z       │                         │  K       │  P       │  '       │  ;       │  .       │          │
+                &none      &kp X      &kp Q      &kp M      &kp W      &kp Z                                &kp K      &kp P      &kp SQT    &kp SEMI   &kp DOT    &none
+        //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
+        //                                               │  TAB     │  SPACE   │  ENTER   │   │  SHIFT   │  BkSPC   │  DEL     │
+                                                         &lt CLC TAB &lt NAV SPACE &kp ENTER  &kp LSHIFT &lt SYM BSPC &lt FUN DEL
+        //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+      >;
+    };
 
-                russian_layer {
-                        bindings = <
-                //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-                //   │          │  Ц       │  Й       │  К       │  Ь (Ъ)   │  Ч       │                         │  Ш (Щ)   │  . (Ф)   │  И       │  Я       │  Ю       │          │
-                        &none      &kp W      &kp Q      &kp R      &lt_hs     &kp X                                &lt_sh     &lt_f      &kp B      &kp Z     &kp COMMA   &none
-                //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │  Т       │  Р       │  Н       │  В       │  М       │                         │  , (Э)   │  С       │  А       │  О       │  Е (Ё)   │          │
-                        &none      &kp N      &kp H      &kp Y      &kp D      &kp V                                &lt_e      &kp C      &kp F      &kp J      &lt_yo     &none 
-                //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │  Г       │  Л       │  П       │  Д       │  Б       │                         │  Ж       │  З       │  Ы       │  У       │  Х       │          │
-                        &none      &kp U      &kp K      &kp G      &kp L     &kp COMMA                             &kp SEMI   &kp P      &kp S      &kp E      &kp LBKT   &none
-                //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
-                //                                               │  TAB     │  SPACE   │  ENTER   │   │  SHIFT   │  BkSPC   │  DEL     │
-                                                                 &lt CLC TAB &lt NAV SPACE &kp ENTER   &kp LSHIFT &lt SYM BSPC &lt FUN DEL
-                //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
-                        >;
-                };
+    russian_layer {
+      bindings = <
+        //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //   │          │  Ц       │  Й       │  К       │  Ь (Ъ)   │  Ч       │                         │  Ш (Щ)   │  . (Ф)   │  И       │  Я       │  Ю       │          │
+                &none      &kp W      &kp Q      &kp R      &lt_hs     &kp X                                &lt_sh     &lt_f      &kp B      &kp Z     &kp COMMA   &none
+        //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │  Т       │  Р       │  Н       │  В       │  М       │                         │  , (Э)   │  С       │  А       │  О       │  Е (Ё)   │          │
+                &none      &kp N      &kp H      &kp Y      &kp D      &kp V                                &lt_e      &kp C      &kp F      &kp J      &lt_yo     &none 
+        //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │  Г       │  Л       │  П       │  Д       │  Б       │                         │  Ж       │  З       │  Ы       │  У       │  Х       │          │
+                &none      &kp U      &kp K      &kp G      &kp L     &kp COMMA                             &kp SEMI   &kp P      &kp S      &kp E      &kp LBKT   &none
+        //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
+        //                                               │  TAB     │  SPACE   │  ENTER   │   │  SHIFT   │  BkSPC   │  DEL     │
+                                                         &lt CLC TAB &lt NAV SPACE &kp ENTER  &kp LSHIFT &lt SYM BSPC &lt FUN DEL
+        //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+      >;
+    };
 
-                navigation_layer {
-                        bindings = <
-                //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-                //   │          │  ESC     │  UNDO    │ PREV TAB │ NEXT TAB │  COPY    │                         │  PGUP    │  HOME    │  ↑       │  END     │  CAPS    │          │
-                        &none      &kp ESC   UNDO_WIN   PRV_TAB    NXT_TAB    COPY_WIN                             &kp PG_UP  &kp HOME    &kp UP     &kp END   &lngcpwin   &none
-                //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │  GUI     │  ALT     │  CTRL    │  SHIFT   │  PASTE   │                         │  PGDOWN  │  ←       │  ↓       │  →       │          │          │
-                        &none     &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT  PASTE_WIN                            &kp PG_DN  &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
-                //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │  BT 0    │  BT 1    │  BT 2    │  BT 3    │ BT CLEAR │                         │  INSERT  │  PTSCRN  │  APP     │  PAUSE   │          │          │
-                        &none &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                        &kp INS  &kp PSCRN &kp K_APP &kp PAUSE_BREAK &none     &none
-                //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
-                //                                               │  GAME    │  X       │          │   │  SHIFT   │  BkSPC   │  DEL     │
-                                                                   &to GME     &none      &none        &kp LSHIFT  &kp BSPC    &kp DEL
-                //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
-                        >;
-                };                
+    navigation_layer {
+      bindings = <
+        //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //   │          │  ESC     │  UNDO    │ PREV TAB │ NEXT TAB │  COPY    │                         │  PGUP    │  HOME    │  ↑       │  END     │  CAPS    │          │
+                &none      &kp ESC   UNDO_WIN   PRV_TAB    NXT_TAB    COPY_WIN                             &kp PG_UP  &kp HOME    &kp UP     &kp END   &lngcpwin   &none
+        //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │  GUI     │  ALT     │  CTRL    │  SHIFT   │  PASTE   │                         │  PGDOWN  │  ←       │  ↓       │  →       │          │          │
+                &none     &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT  PASTE_WIN                            &kp PG_DN  &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
+        //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │  BT 0    │  BT 1    │  BT 2    │  BT 3    │ BT CLEAR │                         │  INSERT  │  PTSCRN  │  APP     │  PAUSE   │          │          │
+                &none &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                        &kp INS  &kp PSCRN &kp K_APP &kp PAUSE_BREAK &none     &none
+        //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
+        //                                               │  GAME    │  X       │          │   │  SHIFT   │  BkSPC   │  DEL     │
+                                                           &to GME     &none      &none        &kp LSHIFT  &kp BSPC    &kp DEL
+        //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+      >;
+    };                
 
-                game_layer {
-                        bindings = <
-                //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-                //   │          │  TAB     │  Q       │  W       │  E       │  R       │                         │          │          │  ↑       │          │          │          │
-                        &none      &kp TAB    &kp Q      &kp W      &kp E      &kp R                                &none      &none      &kp UP     &none      &none      &none
-                //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │  SHIFT   │  A       │  S       │  D       │  F       │                         │          │  ←       │  ↓       │  →       │          │          │
-                        &none    &kp LSHIFT   &kp A      &kp S      &kp D      &kp F                                &none     &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
-                //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │  ESC     │  Z       │  X       │  C       │  V       │                         │          │          │          │          │          │          │
-                        &none      &kp ESC    &kp Z      &kp X      &kp C      &kp V                                &none      &none      &none      &none      &none      &none
-                //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
-                //                                               │  CTRL    │  SPACE   │ GAME FN  │   │   BASE   │  SPACE   │  PTSCRN  │
-                                                                   &kp LCTRL  &kp SPACE  &mo GFN         &to WEN   &kp SPACE  &kp PSCRN
-                //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
-                        >;
-                };
+    game_layer {
+      bindings = <
+        //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //   │          │  TAB     │  Q       │  W       │  E       │  R       │                         │          │          │  ↑       │          │          │          │
+                &none      &kp TAB    &kp Q      &kp W      &kp E      &kp R                                &none      &none      &kp UP     &none      &none      &none
+        //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │  SHIFT   │  A       │  S       │  D       │  F       │                         │          │  ←       │  ↓       │  →       │          │          │
+                &none    &kp LSHIFT   &kp A      &kp S      &kp D      &kp F                                &none     &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
+        //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │  ESC     │  Z       │  X       │  C       │  V       │                         │          │          │          │          │          │          │
+                &none      &kp ESC    &kp Z      &kp X      &kp C      &kp V                                &none      &none      &none      &none      &none      &none
+        //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
+        //                                               │  CTRL    │  SPACE   │ GAME FN  │   │  BASE    │  SPACE   │  PTSCRN  │
+                                                           &kp LCTRL  &kp SPACE  &mo GFN         &to WEN   &kp SPACE  &kp PSCRN
+        //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+      >;
+    };
 
-                gfn_layer {
-                        bindings = <
-                //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-                //   │          │  O       │  5       │  6       │  7       │  8       │                         │          │          │          │          │          │          │
-                        &none      &kp O      &kp N5     &kp N6     &kp N7     &kp N8                               &none      &none      &none      &none      &none      &none
-                //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │  L       │  1       │  2       │  3       │  4       │                         │          │          │          │          │          │          │
-                        &none      &kp L      &kp N1     &kp N2     &kp N3     &kp N4                               &none      &none      &none      &none      &none      &none
-                //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │  G       │  J       │  I       │  M       │  T       │                         │          │          │          │          │          │          │
-                        &none      &kp G      &kp J      &kp I      &kp M      &kp T                                &none      &none      &none      &none      &none      &none
-                //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
-                //                                               │  ENTER   │          │  X       │   │          │          │          │
-                                                                   &kp ENTER   &none      &none          &none      &none      &none
-                //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
-                        >;
-                };       
+    gfn_layer {
+      bindings = <
+        //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //   │          │  O       │  5       │  6       │  7       │  8       │                         │          │          │          │          │          │          │
+                &none      &kp O      &kp N5     &kp N6     &kp N7     &kp N8                               &none      &none      &none      &none      &none      &none
+        //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │  L       │  1       │  2       │  3       │  4       │                         │          │          │          │          │          │          │
+                &none      &kp L      &kp N1     &kp N2     &kp N3     &kp N4                               &none      &none      &none      &none      &none      &none
+        //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │  G       │  J       │  I       │  M       │  T       │                         │          │          │          │          │          │          │
+                &none      &kp G      &kp J      &kp I      &kp M      &kp T                                &none      &none      &none      &none      &none      &none
+        //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
+        //                                               │  ENTER   │          │  X       │   │          │          │          │
+                                                           &kp ENTER   &none      &none          &none      &none      &none
+        //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+      >;
+    };       
 
-                calc_layer {
-                        bindings = <
-                //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-                //   │          │          │          │          │          │          │                         │  *       │  7       │  8       │  9       │  +       │          │
-                        &none      &none      &none      &none      &none      &none                               &kp STAR    &kp N7     &kp N8     &kp N9    &kp PLUS    &none
-                //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │  GUI     │  ALT     │  CTRL    │  SHIFT   │          │                         │  =       │  4       │  5       │  6       │  -       │          │
-                        &none     &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT   &none                               &kp EQUAL   &kp N4     &kp N5     &kp N6    &kp MINUS   &none 
-                //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │          │          │          │          │          │                         │  0       │  1       │  2       │  3       │  /       │          │
-                        &none      &none      &none      &none      &none      &none                                &kp N0     &kp N1     &kp N2     &kp N3    &kp FSLH    &none
-                //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
-                //                                               │  X       │          │          │   │  SHIFT   │  BkSPC   │  DEL     │
-                                                                    &none      &none      &none        &kp LSHIFT  &kp BSPC    &kp DEL
-                //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
-                        >;
-                };
+    calc_layer {
+      bindings = <
+        //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //   │          │          │          │          │          │          │                         │  *       │  7       │  8       │  9       │  +       │          │
+                &none      &none      &none      &none      &none      &none                               &kp STAR    &kp N7     &kp N8     &kp N9    &kp PLUS    &none
+        //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │  GUI     │  ALT     │  CTRL    │  SHIFT   │          │                         │  =       │  4       │  5       │  6       │  -       │          │
+                &none     &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT   &none                               &kp EQUAL   &kp N4     &kp N5     &kp N6    &kp MINUS   &none 
+        //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │          │          │          │          │          │                         │  0       │  1       │  2       │  3       │  /       │          │
+                &none      &none      &none      &none      &none      &none                                &kp N0     &kp N1     &kp N2     &kp N3    &kp FSLH    &none
+        //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
+        //                                               │  X       │          │          │   │  SHIFT   │  BkSPC   │  DEL     │
+                                                            &none      &none      &none        &kp LSHIFT  &kp BSPC    &kp DEL
+        //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+      >;
+    };
 
-                symbols_layer {
-                        bindings = <
-                //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-                //   │          │  !       │  @       │  #       │  $       │  %       │                         │  *       │  -       │  _       │  ~       │  `       │          │
-                        &none     &kp EXCL    &kp AT    &kp HASH   &kp DLLR   &kp PRCNT                            &kp STAR  &kp MINUS   &kp UNDER  &kp TILDE  &kp GRAVE   &none
-                //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │  GUI     │  ALT     │  CTRL    │  SHIFT   │  ^       │                         │  :       │  (       │  {       │  [       │  <       │          │
-                        &none     &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT  &kp CARET                            &kp COLON  &kp LPAR   &kp LBRC   &kp LBKT    &kp LT     &none 
-                //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │          │  /       │  |       │  \       │  &       │                         │  ?       │  )       │  }       │  ]       │  >       │          │
-                        &none      &none     &kp FSLH   &kp PIPE   &kp NUBS   &kp AMPS                             &kp QMARK  &kp RPAR   &kp RBRC   &kp RBKT    &kp GT     &none
-                //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
-                //                                               │          │          │          │   │          │  X       │          │
-                                                                    &none      &none      &none          &none      &none      &none
-                //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
-                        >;
-                };
+    symbols_layer {
+      bindings = <
+        //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //   │          │  !       │  @       │  #       │  $       │  %       │                         │  *       │  -       │  _       │  ~       │  `       │          │
+                &none     &kp EXCL    &kp AT    &kp HASH   &kp DLLR   &kp PRCNT                            &kp STAR  &kp MINUS   &kp UNDER  &kp TILDE  &kp GRAVE   &none
+        //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │  GUI     │  ALT     │  CTRL    │  SHIFT   │  ^       │                         │  :       │  (       │  {       │  [       │  <       │          │
+                &none     &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT  &kp CARET                            &kp COLON  &kp LPAR   &kp LBRC   &kp LBKT    &kp LT     &none 
+        //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │          │  /       │  |       │  \       │  &       │                         │  ?       │  )       │  }       │  ]       │  >       │          │
+                &none      &none     &kp FSLH   &kp PIPE   &kp NUBS   &kp AMPS                             &kp QMARK  &kp RPAR   &kp RBRC   &kp RBKT    &kp GT     &none
+        //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
+        //                                               │          │          │          │   │          │  X       │          │
+                                                            &none      &none      &none          &none      &none      &none
+        //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+      >;
+    };
 
-                function_layer {
-                        bindings = <
-                //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-                //   │          │  STOP    │  PLAY    │ PREVIOUS │  NEXT    │ BRIGHTUP │                         │  F12     │  F7      │  F8      │  F9      │          │          │
-                        &none    &kp C_STOP  &kp C_PP  &kp C_PREV &kp C_NEXT &kp C_BRI_UP                           &kp F12    &kp F7     &kp F8     &kp F9     &none      &none
-                //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │  GUI     │  ALT     │  CTRL    │  SHIFT   │ BRIGHTDN │                         │  F11     │  F4      │  F5      │  F6      │          │          │
-                        &none     &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT &kp C_BRI_DN                           &kp F11    &kp F4     &kp F5     &kp F6     &none      &none 
-                //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-                //   │          │          │  MUTE    │ VOL DWN  │  VOL UP  │          │                         │  F10     │  F1      │  F2      │  F3      │          │          │
-                        &none      &none    &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &none                              &kp F10    &kp F1     &kp F2     &kp F3     &none      &none
-                //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
-                //                                               │          │          │          │   │          │          │  X       │
-                                                                    &none      &none      &none          &none      &none      &none
-                //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
-                        >;
-                };
-        };
+    function_layer {
+      bindings = <
+        //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //   │          │  STOP    │  PLAY    │ PREVIOUS │  NEXT    │ BRIGHTUP │                         │  F12     │  F7      │  F8      │  F9      │          │          │
+                &none    &kp C_STOP  &kp C_PP  &kp C_PREV &kp C_NEXT &kp C_BRI_UP                           &kp F12    &kp F7     &kp F8     &kp F9     &none      &none
+        //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │  GUI     │  ALT     │  CTRL    │  SHIFT   │ BRIGHTDN │                         │  F11     │  F4      │  F5      │  F6      │          │          │
+                &none     &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT &kp C_BRI_DN                           &kp F11    &kp F4     &kp F5     &kp F6     &none      &none 
+        //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │          │  MUTE    │ VOL DWN  │  VOL UP  │          │                         │  F10     │  F1      │  F2      │  F3      │          │          │
+                &none      &none    &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &none                              &kp F10    &kp F1     &kp F2     &kp F3     &none      &none
+        //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
+        //                                               │          │          │          │   │          │          │  X       │
+                                                            &none      &none      &none          &none      &none      &none
+        //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+      >;
+    };
+  };
 };
