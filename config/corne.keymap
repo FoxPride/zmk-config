@@ -237,14 +237,14 @@
     game_layer {
       bindings = <
         //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-        //   │          │  TAB     │  Q       │  X       │  E       │  R       │                         │          │          │  ↑       │          │          │          │
-                &none      &kp TAB    &kp Q      &kp X      &kp E      &kp R                                &none      &none      &kp UP     &none      &none      &none
+        //   │          │  TAB     │  Q       │  X       │  E       │  R       │                         │          │          │          │          │          │          │
+                &none      &kp TAB    &kp Q      &kp X      &kp E      &kp R                                &none      &none      &none      &none     &none      &none
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-        //   │          │  SHIFT   │  A       │  W       │  D       │  F       │                         │          │  ←       │  ↓       │  →       │          │          │
-                &none    &kp LSHIFT   &kp A      &kp W      &kp D      &kp F                                &none     &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
+        //   │          │  SHIFT   │  A       │  W       │  D       │  F       │                         │          │  ←       │  ↑       │  →       │          │          │
+                &none    &kp LSHIFT   &kp A      &kp W      &kp D      &kp F                                &none     &kp LEFT    &kp UP   &kp RIGHT   &none      &none 
         //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-        //   │          │  ESC     │  Z       │  S       │  C       │  V       │                         │          │          │          │          │          │          │
-                &none      &kp ESC    &kp Z      &kp S      &kp C      &kp V                                &none      &none      &none      &none      &none      &none
+        //   │          │  ESC     │  Z       │  S       │  C       │  V       │                         │          │          │  ↓       │          │          │          │
+                &none      &kp ESC    &kp Z      &kp S      &kp C      &kp V                                &none      &none     &kp DOWN    &none     &none      &none
         //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
         //                                               │  CTRL    │  SPACE   │ GAME FN  │   │  BASE    │  SPACE   │  PTSCRN  │
                                                            &kp LCTRL  &kp SPACE  &mo GFN        &tog GME   &kp SPACE  &kp PSCRN
