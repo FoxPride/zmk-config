@@ -157,7 +157,7 @@
                 &none      &kp U      &kp K      &kp G      &kp L     &kp COMMA                             &kp SEMI   &kp P      &kp S      &kp E      &kp LBKT   &none
         //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
         //                                               │  TAB     │  SPACE   │  ENTER   │   │  SHIFT   │  BkSPC   │  DEL     │
-                                                         &lt CLC TAB &lt WNV SPACE &kp ENTER  &kp LSHIFT &lt SYM BSPC &lt FUN DEL
+                                                            &trans     &trans     &trans         &trans     &trans     &trans
         //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
       >;
     };
@@ -165,17 +165,17 @@
     win_navigation_layer {
       bindings = <
         //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-        //   │          │  ESC     │  UNDO    │ PREV TAB │ NEXT TAB │  COPY    │                         │  PGUP    │  HOME    │  ↑       │  END     │  CAPS    │          │
-                &none      &kp ESC   UNDO_WIN   PRV_TAB    NXT_TAB    COPY_WIN                             &kp PG_UP  &kp HOME    &kp UP     &kp END   &lngcpwin   &none
+        //   │          │  ESC     │  UNDO    │ PREV TAB │ NEXT TAB │  COPY    │                         │  PGUP    │  HOME    │          │  END     │  CAPS    │          │
+                &none      &kp ESC   UNDO_WIN   PRV_TAB    NXT_TAB    COPY_WIN                             &kp PG_UP  &kp HOME    &none      &kp END   &lngcpwin   &none
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-        //   │          │  GUI     │  ALT     │  CTRL    │  SHIFT   │  PASTE   │                         │  PGDOWN  │  ←       │  ↓       │  →       │          │          │
-                &none     &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT  PASTE_WIN                            &kp PG_DN  &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
+        //   │          │  GUI     │  ALT     │  CTRL    │  SHIFT   │  PASTE   │                         │  PGDOWN  │  ←       │  ↑       │  →       │          │          │
+                &none     &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT  PASTE_WIN                            &kp PG_DN  &kp LEFT    &kp UP    &kp RIGHT   &none      &none 
         //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-        //   │          │  BT 0    │  BT 1    │  BT 2    │  BT 3    │ BT CLEAR │                         │  INSERT  │  PTSCRN  │  APP     │  PAUSE   │          │          │
-                &none &sel 0 WEN &sel 1 MEN &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                            &kp INS  &kp PSCRN &kp K_APP &kp PAUSE_BREAK &none     &none
+        //   │          │  BT 0    │  BT 1    │  BT 2    │  BT 3    │ BT CLEAR │                         │  INSERT  │  PTSCRN  │  ↓       │  PAUSE   │          │          │
+                &none &sel 0 WEN &sel 1 MEN &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                            &kp INS  &kp PSCRN &kp DOWN &kp PAUSE_BREAK &none      &none
         //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
         //                                               │  GAME    │  X       │          │   │  SHIFT   │  BkSPC   │  DEL     │
-                                                           &tog GME    &none      &none        &kp LSHIFT  &kp BSPC    &kp DEL
+                                                           &tog GME    &none      &none          &trans    &kp BSPC    &kp DEL
         //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
       >;
     };                
@@ -211,7 +211,7 @@
                 &none      &kp U      &kp K      &kp G      &kp L     &kp COMMA                             &kp SEMI   &kp P      &kp S      &kp E      &kp LBKT   &none
         //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
         //                                               │  TAB     │  SPACE   │  ENTER   │   │  SHIFT   │  BkSPC   │  DEL     │
-                                                         &lt CLC TAB &lt MNV SPACE &kp ENTER  &kp LSHIFT &lt SYM BSPC &lt FUN DEL
+                                                            &trans     &trans     &trans         &trans     &trans     &trans
         //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
       >;
     };
@@ -219,17 +219,17 @@
     mac_navigation_layer {
       bindings = <
         //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-        //   │          │  ESC     │  UNDO    │ PREV TAB │ NEXT TAB │  COPY    │                         │  PGUP    │  HOME    │  ↑       │  END     │  CAPS    │          │
-                &none      &kp ESC   UNDO_MAC   PRV_TAB    NXT_TAB    COPY_MAC                             &kp PG_UP  &kp HOME    &kp UP     &kp END   &lngcpmac   &none
+        //   │          │  ESC     │  UNDO    │ PREV TAB │ NEXT TAB │  COPY    │                         │  PGUP    │  HOME    │          │  END     │  CAPS    │          │
+                &none      &kp ESC   UNDO_MAC   PRV_TAB    NXT_TAB    COPY_MAC                             &kp PG_UP  &kp HOME    &none      &kp END   &lngcpmac   &none
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-        //   │          │  CTRL    │  ALT     │  GUI     │  SHIFT   │  PASTE   │                         │  PGDOWN  │  ←       │  ↓       │  →       │          │          │
-                &none     &sk LCTRL  &sk LALT   &sk LGUI  &sk LSHFT   PASTE_MAC                            &kp PG_DN  &kp LEFT   &kp DOWN   &kp RIGHT   &none      &none 
+        //   │          │  CTRL    │  ALT     │  GUI     │  SHIFT   │  PASTE   │                         │  PGDOWN  │  ←       │  ↑       │  →       │          │          │
+                &none     &sk LCTRL  &sk LALT   &sk LGUI  &sk LSHFT   PASTE_MAC                            &kp PG_DN  &kp LEFT   &kp UP     &kp RIGHT   &none      &none 
         //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-        //   │          │  BT 0    │  BT 1    │  BT 2    │  BT 3    │ BT CLEAR │                         │  INSERT  │  PTSCRN  │  APP     │  PAUSE   │          │          │
-                &none &sel 0 WEN &sel 1 MEN &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                            &kp INS  &kp PSCRN &kp K_APP &kp PAUSE_BREAK &none     &none
+        //   │          │  BT 0    │  BT 1    │  BT 2    │  BT 3    │ BT CLEAR │                         │  INSERT  │  PTSCRN  │  ↓       │  PAUSE   │          │          │
+                &none &sel 0 WEN &sel 1 MEN &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                            &kp INS  &kp PSCRN &kp DOWN &kp PAUSE_BREAK &none      &none
         //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
         //                                               │  GAME    │  X       │          │   │  SHIFT   │  BkSPC   │  DEL     │
-                                                           &tog GME    &none      &none        &kp LSHIFT  &kp BSPC    &kp DEL
+                                                           &tog GME    &none      &none          &trans    &kp BSPC    &kp DEL
         //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
       >;
     };                
@@ -238,13 +238,13 @@
       bindings = <
         //   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
         //   │          │  TAB     │  Q       │  X       │  E       │  R       │                         │          │          │          │          │          │          │
-                &none      &kp TAB    &kp Q      &kp X      &kp E      &kp R                                &none      &none      &none      &none     &none      &none
+                &none      &kp TAB    &kp Q      &kp X      &kp E      &kp R                                &none      &none      &none      &none      &none      &none
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │          │  SHIFT   │  A       │  W       │  D       │  F       │                         │          │  ←       │  ↑       │  →       │          │          │
-                &none    &kp LSHIFT   &kp A      &kp W      &kp D      &kp F                                &none     &kp LEFT    &kp UP   &kp RIGHT   &none      &none 
+                &none    &kp LSHIFT   &kp A      &kp W      &kp D      &kp F                                &none     &kp LEFT    &kp UP   &kp RIGHT    &none      &none 
         //   ├──────────├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │          │  ESC     │  Z       │  S       │  C       │  V       │                         │          │          │  ↓       │          │          │          │
-                &none      &kp ESC    &kp Z      &kp S      &kp C      &kp V                                &none      &none     &kp DOWN    &none     &none      &none
+                &none      &kp ESC    &kp Z      &kp S      &kp C      &kp V                                &none      &none     &kp DOWN    &none      &none      &none
         //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
         //                                               │  CTRL    │  SPACE   │ GAME FN  │   │  BASE    │  SPACE   │  PTSCRN  │
                                                            &kp LCTRL  &kp SPACE  &mo GFN        &tog GME   &kp SPACE  &kp PSCRN
@@ -282,8 +282,8 @@
         //   │          │          │          │          │          │          │                         │  0       │  1       │  2       │  3       │  /       │          │
                 &none      &none      &none      &none      &none      &none                                &kp N0     &kp N1     &kp N2     &kp N3    &kp FSLH    &none
         //   ╰──────────┴──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────┴──────────╯
-        //                                               │  X       │          │          │   │  SHIFT   │  BkSPC   │  DEL     │
-                                                            &none      &none      &none        &kp LSHIFT  &kp BSPC    &kp DEL
+        //                                               │  X       │          │          │   │          │  BkSPC   │  DEL     │
+                                                            &none      &none      &none          &none     &kp BSPC    &kp DEL
         //                                               ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
       >;
     };
