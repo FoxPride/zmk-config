@@ -33,8 +33,70 @@
 #define SYM 9  // Symbols
 #define FUN 10 // Func
 
+#define COMBO_TIMEOUT 50
+#define COMBO_IDLE 75
+
 &sk {
   quick-release;
+};
+
+/*            KEY POSITIONS
+  ╭────────────────╮ ╭────────────────╮
+  │ 0  1  2  3  4  │ │ 5  6  7  8  9  │
+  │ 10 11 12 13 14 │ │ 15 16 17 18 19 │
+  │ 20 21 22 23 24 │ │ 25 26 27 28 29 │
+  ╰─────╮ 30 31 32 │ │ 33 34 35 ╭─────╯
+        ╰──────────╯ ╰──────────╯ */
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+
+        // Russian letter "Ъ"
+        combo_ru_hs {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <2 3>;
+            bindings = <&kp RBKT>;
+            layers = <WRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+
+        // Russian letter "Щ"
+        combo_ru_sh {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <5 6>;
+            bindings = <&kp O>;
+            layers = <WRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+
+        // Russian letter "Ф"
+        combo_ru_f {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <6 7>;
+            bindings = <&kp A>;
+            layers = <WRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+
+        // Russian letter "Э"
+        combo_ru_e {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <15 16>;
+            bindings = <&kp SQT>;
+            layers = <WRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+
+        // Russian letter "Ё"
+        combo_ru_yo {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <18 19>;
+            bindings = <&kp GRAVE>;
+            layers = <WRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+    };  
 };
 
 / {
@@ -53,41 +115,6 @@
       #binding-cells = <0>;
       bindings = <&lang MRU LANG_MAC>, <&kp CAPS>;
       mods = <(MOD_LSFT)>;
-    };
-    // Russian letter Ё
-    lt_yo: letter_yo {
-      compatible = "zmk,behavior-mod-morph";
-      #binding-cells = <0>;
-      bindings = <&kp T>, <&kp GRAVE>;
-      mods = <(MOD_LALT)>;
-    };
-    // Russian letter Щ
-    lt_sh: letter_sh {
-      compatible = "zmk,behavior-mod-morph";
-      #binding-cells = <0>;
-      bindings = <&kp I>, <&kp O>;
-      mods = <(MOD_LALT)>;
-    };
-    // Russian letter Ъ
-    lt_hs: letter_hs {
-      compatible = "zmk,behavior-mod-morph";
-      #binding-cells = <0>;
-      bindings = <&kp M>, <&kp RBKT>;
-      mods = <(MOD_LALT)>;
-    };
-    // Russian letter Э
-    lt_e: letter_e {
-      compatible = "zmk,behavior-mod-morph";
-      #binding-cells = <0>;
-      bindings = <&kp QMARK>, <&kp SQT>;
-      mods = <(MOD_LALT)>;
-    };
-    // Russian letter Ф
-    lt_f: letter_f {
-      compatible = "zmk,behavior-mod-morph";
-      #binding-cells = <0>;
-      bindings = <&kp FSLH>, <&kp A>;
-      mods = <(MOD_LALT)>;
     };
   };
 };
@@ -149,11 +176,11 @@
     win_ru_layer {
       bindings = <
         //   ╭──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //   │  Ц       │  Й       │  К       │  Ь (Ъ)   │  Ч       │                         │  Ш (Щ)   │  . (Ф)   │  И       │  Я       │  Ю       │
-                &kp W      &kp Q      &kp R      &lt_hs     &kp X                                &lt_sh     &lt_f      &kp B      &kp Z      &kp DOT
+        //   │  Ц       │  Й       │  К       │  Ь      (Ъ) Ч       │                         │  Ш      (Щ) .      (Ф) И       │  Я       │  Ю       │
+                &kp W      &kp Q      &kp R      &kp M      &kp X                                &kp I     &kp FSLH    &kp B      &kp Z      &kp DOT
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //   │  Т       │  Р       │  Н       │  В       │  М       │                         │  , (Э)   │  С       │  А       │  О       │  Е (Ё)   │
-                &kp N      &kp H      &kp Y      &kp D      &kp V                                &lt_e      &kp C      &kp F      &kp J      &lt_yo
+        //   │  Т       │  Р       │  Н       │  В       │  М       │                         │  ,      (Э) С       │  А       │  О      (Ё) Е       │
+                &kp N      &kp H      &kp Y      &kp D      &kp V                               &kp QMARK   &kp C      &kp F      &kp J      &kp T
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │  Г       │  Л       │  П       │  Д       │  Б       │                         │  Ж       │  З       │  Ы       │  У       │  Х       │
                 &kp U      &kp K      &kp G      &kp L     &kp COMMA                             &kp SEMI   &kp P      &kp S      &kp E      &kp LBKT
@@ -203,11 +230,11 @@
     mac_ru_layer {
       bindings = <
         //   ╭──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //   │  Ц       │  Й       │  К       │  Ь (Ъ)   │  Ч       │                         │  Ш (Щ)   │  . (Ф)   │  И       │  Я       │  Ю       │
-                &kp W      &kp Q      &kp R      &lt_hs     &kp X                                &lt_sh     &lt_f      &kp B      &kp Z      &kp DOT
+        //   │  Ц       │  Й       │  К       │  Ь      (Ъ) Ч       │                         │  Ш      (Щ) .      (Ф) И       │  Я       │  Ю       │
+                &kp W      &kp Q      &kp R      &kp M      &kp X                                &kp I     &kp FSLH    &kp B      &kp Z      &kp DOT
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //   │  Т       │  Р       │  Н       │  В       │  М       │                         │  , (Э)   │  С       │  А       │  О       │  Е (Ё)   │
-                &kp N      &kp H      &kp Y      &kp D      &kp V                                &lt_e      &kp C      &kp F      &kp J      &lt_yo
+        //   │  Т       │  Р       │  Н       │  В       │  М       │                         │  ,      (Э) С       │  А       │  О      (Ё) Е       │
+                &kp N      &kp H      &kp Y      &kp D      &kp V                               &kp QMARK   &kp C      &kp F      &kp J      &kp T
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │  Г       │  Л       │  П       │  Д       │  Б       │                         │  Ж       │  З       │  Ы       │  У       │  Х       │
                 &kp U      &kp K      &kp G      &kp L     &kp COMMA                             &kp SEMI   &kp P      &kp S      &kp E      &kp LBKT
