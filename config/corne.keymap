@@ -11,8 +11,16 @@
 #define PRV_TAB   &kp LC(LS(TAB)) 
 #define NXT_TAB   &kp LC(TAB)
 
-#define LANG_WIN  LG(SPACE)
-#define LANG_MAC  LC(SPACE)
+#define WIN_COPY  LC(C)
+#define WIN_PASTE LC(V)
+#define WIN_CUT   LC(X)
+#define WIN_UNDO  LC(Z)
+#define WIN_LANG  LG(SPACE)
+#define MAC_COPY  LG(C)
+#define MAC_PASTE LG(V)
+#define MAC_CUT   LG(X)
+#define MAC_UNDO  LG(Z)
+#define MAC_LANG  LC(SPACE)
 
 #define KEYS_L 0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 // Left-hand keys.
 #define KEYS_R 5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 // Right-hand keys.
@@ -58,7 +66,7 @@
             timeout-ms = <COMBO_TIMEOUT>;
             key-positions = <2 3>;
             bindings = <&kp RBKT>;
-            layers = <WRU>;
+            layers = <WRU MRU>;
             require-prior-idle-ms = <COMBO_IDLE>;
         };
 
@@ -97,28 +105,100 @@
             layers = <WRU MRU>;
             require-prior-idle-ms = <COMBO_IDLE>;
         };
+
+        // Win - Copy
+        combo_win_copy {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <2 3>;
+            bindings = <&kp WIN_COPY>;
+            layers = <WEN WRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+
+        // Win - Paste
+        combo_win_paste {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <2 4>;
+            bindings = <&kp WIN_PASTE>;
+            layers = <WEN WRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+
+        // Win - Cut
+        combo_win_cut {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <1 4>;
+            bindings = <&kp WIN_CUT>;
+            layers = <WEN WRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+
+        // Win - Undo
+        combo_win_undo {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <1 2>;
+            bindings = <&kp WIN_UNDO>;
+            layers = <WEN WRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+
+        // Win - Change language
+        combo_win_lang {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <22 23>;
+            bindings = <&lang WRU WIN_LANG>;
+            layers = <WEN WRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+		
+        // Mac - Copy
+        combo_mac_copy {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <2 3>;
+            bindings = <&kp MAC_COPY>;
+            layers = <MEN MRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+
+        // Mac - Paste
+        combo_mac_paste {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <2 4>;
+            bindings = <&kp MAC_PASTE>;
+            layers = <MEN MRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+
+        // Mac - Cut
+        combo_mac_cut {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <1 4>;
+            bindings = <&kp MAC_CUT>;
+            layers = <MEN MRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+
+        // Mac - Undo
+        combo_mac_undo {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <1 2>;
+            bindings = <&kp MAC_UNDO>;
+            layers = <MEN MRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+
+        // Mac - Change language
+        combo_mac_lang {
+            timeout-ms = <COMBO_TIMEOUT>;
+            key-positions = <22 23>;
+            bindings = <&lang MRU MAC_LANG>;
+            layers = <MEN MRU>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
     };  
 };
 
-/ {
-  behaviors {
-    // Switch language or press Capslock
-    lngcpwin: lang_caps_win {
-      compatible = "zmk,behavior-mod-morph";
-      #binding-cells = <0>;
-      bindings = <&lang WRU LANG_WIN>, <&kp CAPS>;
-      mods = <(MOD_LSFT)>;
-    };
-    lngcpmac: lang_caps_mac {
-      compatible = "zmk,behavior-mod-morph";
-      #binding-cells = <0>;
-      bindings = <&lang MRU LANG_MAC>, <&kp CAPS>;
-      mods = <(MOD_LSFT)>;
-    };
-  };
-};
-
-/ {
+ / {
   macros  {
     // Switch language and activate layer
     lang: lang {
@@ -256,11 +336,11 @@
     navigation_layer {
       bindings = <
         //   ╭──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //   │  ESC     │  UNDO    │ PREV TAB │ NEXT TAB │  COPY    │                         │  PGUP    │  HOME    │          │  END     │  CAPS    │
-                &kp ESC   UNDO_WIN   PRV_TAB    NXT_TAB    COPY_WIN                             &kp PG_UP  &kp HOME    &none      &kp END   &lngcpwin
+        //   │  ESC     │          │ PREV TAB │ NEXT TAB │          │                         │  PGUP    │  HOME    │          │  END     │  CAPS    │
+                &kp ESC    &none     PRV_TAB    NXT_TAB     &none                               &kp PG_UP  &kp HOME    &none      &kp END   &kp CAPS
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //   │  GUI     │  ALT     │  CTRL    │  SHIFT   │  PASTE   │                         │  PGDOWN  │  ←       │  ↑       │  →       │          │
-               &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT  PASTE_WIN                            &kp PG_DN  &kp LEFT    &kp UP    &kp RIGHT   &none
+        //   │  GUI     │  ALT     │  CTRL    │  SHIFT   │          │                         │  PGDOWN  │  ←       │  ↑       │  →       │          │
+               &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT   &none                               &kp PG_DN  &kp LEFT    &kp UP    &kp RIGHT   &none
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │  BT 0    │  BT 1    │  BT 2    │  BT 3    │ BT CLEAR │                         │  INSERT  │  PTSCRN  │  ↓       │  PAUSE   │          │
            &sel 0 WEN &sel 1 MEN &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                            &kp INS  &kp PSCRN &kp DOWN &kp PAUSE_BREAK &none
