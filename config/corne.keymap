@@ -347,8 +347,8 @@
         //   │  ESC     │  TAB     │ PREV TAB │ NEXT TAB │          │                         │  PGUP    │  HOME    │          │  END     │  CAPS    │
                 &kp ESC    &kp TAB   PRV_TAB    NXT_TAB     &none                               &kp PG_UP  &kp HOME    &none      &kp END   &kp CAPS
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //   │  GUI     │  ALT     │  CTRL    │  SHIFT   │          │                         │  PGDOWN  │  ←       │  ↑       │  →       │          │
-               &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT   &none                               &kp PG_DN  &kp LEFT    &kp UP    &kp RIGHT   &none
+        //   │  GUI     │  ALT     │  CTRL    │  SHIFT   │  DEL     │                         │  PGDOWN  │  ←       │  ↑       │  →       │          │
+               &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT   &kp DEL                             &kp PG_DN  &kp LEFT    &kp UP    &kp RIGHT   &none
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │  BT 0    │  BT 1    │  BT 2    │  BT 3    │ BT CLEAR │                         │  INSERT  │  PTSCRN  │  ↓       │  PAUSE   │          │
            &sel 0 WEN &sel 1 MEN &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                            &kp INS  &kp PSCRN &kp DOWN &kp PAUSE_BREAK &none
