@@ -4,6 +4,9 @@
  * SPDX-License-Identifier: MIT
  */
 
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 1500  // 600
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 200   // 10
+
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
@@ -39,8 +42,12 @@
 #define KEYS_R 5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 // Right-hand keys.
 #define THUMBS 30 31 32 33 34 35                       // Thumb keys.
 
-#define HML(k1, k2, k3, k4) &hml LGUI  k1 &hml LALT  k2 &hml LCTRL k3 &hml LSHFT k4
-#define HMR(k1, k2, k3, k4) &hmr RSHFT k1 &hmr RCTRL k2 &hmr RALT  k3 &hmr RGUI  k4
+// Win modifiers
+#define HML(k1, k2, k3, k4)  &hml LGUI  k1 &hml LALT  k2 &hml LCTRL k3 &hml LSHFT k4
+#define HMR(k1, k2, k3, k4)  &hmr RSHFT k1 &hmr RCTRL k2 &hmr RALT  k3 &hmr RGUI  k4
+// Mac modifiers
+#define HMLM(k1, k2, k3, k4) &hml LCTRL k1 &hml LALT  k2 &hml LGUI  k3 &hml LSHFT k4
+#define HMRM(k1, k2, k3, k4) &hmr RSHFT k1 &hmr RGUI  k2 &hmr RALT  k3 &hmr RCTRL k4
 
 #define WEN 0  // Win EN
 #define MEN 1  // Mac EN
@@ -62,10 +69,6 @@
   quick-release;
 };
 
-&lt {
-  quick-tap-ms = <QUICK_TAP>;
-};
-
 /*            KEY POSITIONS
   ╭────────────────╮ ╭────────────────╮
   │ 0  1  2  3  4  │ │ 5  6  7  8  9  │
@@ -83,7 +86,7 @@
         // Russian letter "Ъ"
         combo_ru_hs {
             timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <2 3>;
+            key-positions = <3 4>;
             bindings = <&kp RBKT>;
             layers = <WRU MRU>;
             require-prior-idle-ms = <COMBO_IDLE>;
@@ -346,13 +349,13 @@
       bindings = <
         //   ╭──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //   │  Ц       │  Й       │  К       │  Ь      (Ъ) Ч       │                         │  Ш      (Щ) .      (Ф) И       │  Я       │  Ю       │
-                &trans     &trans     &trans     &trans     &trans                               &trans     &trans     &trans     &trans     &trans
+                &kp W      &kp Q      &kp R      &kp M      &kp X                                &kp I     &kp FSLH    &kp B      &kp Z      &kp DOT
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │  Т       │  Р       │  Н       │  В       │  М       │                         │  ,      (Э) С       │  А       │  О      (Ё) Е       │
-             &hml LCTRL N  &trans   &hml LGUI Y  &trans     &trans                               &trans     &trans   &hmr RGUI F  &trans  &hmr RCTRL T
+                HMLM (N,   H,         Y,         D)         &kp V                               &kp QMARK   HMRM(C,    F,         J,         T)
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │  Г       │  Л       │  П       │  Д       │  Б       │                         │  Ж       │  З       │  Ы       │  У       │  Х       │
-                &trans     &trans     &trans     &trans     &trans                               &trans     &trans     &trans     &trans     &trans
+                &kp U      &kp K      &kp G      &kp L     &kp COMMA                             &kp SEMI   &kp P      &kp S      &kp E      &kp LBKT
         //   ╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
         //                                    │  Repeat  │  SPACE   │  ENTER   │   │  SHIFT   │  BkSPC   │  DEL     │
                                                  &trans     &trans     &trans         &trans     &trans     &trans
@@ -385,13 +388,13 @@
                 &none      &none      &none      &none      &none                               &kp STAR    &kp N7     &kp N8     &kp N9    &kp PLUS
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │  GUI     │  ALT     │  CTRL    │  SHIFT   │          │                         │  =       │  4       │  5       │  6       │  -       │
-               &trans      &trans     &trans     &trans     &none                               &kp EQUAL   &kp N4     &kp N5     &kp N6    &kp MINUS
+               &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT   &none                               &kp EQUAL   &kp N4     &kp N5     &kp N6    &kp MINUS
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │          │          │          │          │          │                         │  0       │  1       │  2       │  3       │  /       │
                 &none      &none      &none      &none      &none                                &kp N0     &kp N1     &kp N2     &kp N3    &kp FSLH
         //   ╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
         //                                    │  X       │          │          │   │          │  BkSPC   │  DEL     │
-                                                 &none      &none      &none          &none      &trans     &trans
+                                                 &none      &none      &none          &none     &kp BSPC    &kp DEL
         //                                    ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
       >;
     };
@@ -403,7 +406,7 @@
                &kp EXCL    &kp AT    &kp HASH   &kp DLLR   &kp PRCNT                            &kp STAR  &kp MINUS   &kp UNDER  &kp TILDE  &kp GRAVE
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │  GUI     │  ALT     │  CTRL    │  SHIFT   │  ^       │                         │  :       │  (       │  {       │  [       │  <       │
-               &trans      &trans     &trans     &trans    &kp CARET                            &kp COLON  &kp LPAR   &kp LBRC   &kp LBKT    &kp LT
+               &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT  &kp CARET                            &kp COLON  &kp LPAR   &kp LBRC   &kp LBKT    &kp LT
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │          │  /       │  |       │  \       │  &       │                         │  ?       │  )       │  }       │  ]       │  >       │
                 &none     &kp FSLH   &kp PIPE   &kp NUBS   &kp AMPS                             &kp QMARK  &kp RPAR   &kp RBRC   &kp RBKT    &kp GT
@@ -421,7 +424,7 @@
               &kp C_STOP  &kp C_PP  &kp C_PREV &kp C_NEXT &kp C_BRI_UP                           &kp F12    &kp F7     &kp F8     &kp F9     &none
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │  GUI     │  ALT     │  CTRL    │  SHIFT   │ BRIGHTDN │                         │  F11     │  F4      │  F5      │  F6      │          │
-               &trans      &trans     &trans     &trans   &kp C_BRI_DN                           &kp F11    &kp F4     &kp F5     &kp F6     &none
+               &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT &kp C_BRI_DN                           &kp F11    &kp F4     &kp F5     &kp F6     &none
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │          │  MUTE    │ VOL DWN  │  VOL UP  │          │                         │  F10     │  F1      │  F2      │  F3      │          │
                 &none    &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &none                              &kp F10    &kp F1     &kp F2     &kp F3     &none
