@@ -7,6 +7,19 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/pointing.h>
+
+#define MM_U &mmv MOVE_UP
+#define MM_D &mmv MOVE_DOWN
+#define MM_L &mmv MOVE_LEFT
+#define MM_R &mmv MOVE_RIGHT
+#define MS_U &msc SCRL_UP
+#define MS_D &msc SCRL_DOWN
+#define MS_L &msc SCRL_LEFT
+#define MS_R &msc SCRL_RIGHT
+#define MC_L &mkp LCLK
+#define MC_R &mkp RCLK
+#define MC_M &mkp MCLK
 
 #define PRV_TAB   &kp LC(LS(TAB)) 
 #define NXT_TAB   &kp LC(TAB)
@@ -39,6 +52,7 @@
 #define FUN 7  // Func
 #define GME 8  // Game
 #define GFN 9  // Game fn
+#define MOS 10 // Mouse
 
 #define COMBO_TIMEOUT 50
 #define COMBO_IDLE 75
@@ -358,8 +372,8 @@
         //   │  BT 0    │  BT 1    │  BT 2    │  BT 3    │ BT CLEAR │                         │  INSERT  │  PTSCRN  │  ↓       │  PAUSE   │          │
            &sel 0 WEN &sel 1 MEN &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                            &kp INS  &kp PSCRN &kp DOWN &kp PAUSE_BREAK &none
         //   ╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
-        //                                    │  GAME    │  X       │          │   │  SHIFT   │  BkSPC   │  DEL     │
-                                                &tog GME    &none      &none          &trans    &kp BSPC    &kp DEL
+        //                                    │  GAME    │  X       │  MOUSE   │   │  SHIFT   │  BkSPC   │  DEL     │
+                                                &tog GME    &none     &tog MOS        &trans    &kp BSPC    &kp DEL
         //                                    ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
       >;
     };                
@@ -450,6 +464,24 @@
         //   ╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
         //                                    │  ENTER   │          │  X       │   │          │          │          │
                                                 &kp ENTER   &none      &none          &none      &none      &none
+        //                                    ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+      >;
+    };       
+
+    mouse_layer {
+      bindings = <
+        //   ╭──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────╮
+        //   │          │          │          │          │          │                         │          │ SCRL UP  │   MCLK   │ SCRL DWN │          │
+                &none      &none      &none      &none      &none                                &none       MS_U       MC_M       MS_D      &none
+        //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │          │          │          │          │                         │ SCRL LFT │ MOVE LFT │  MOVE UP │ MOVE RHT │ SCRL RHT │
+                &none      &none      &none      &none      &none                                 MS_L       MM_L       MM_U       MM_R       MS_R
+        //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
+        //   │          │          │          │          │          │                         │          │   LCLK   │ MOVE DWN │   RCLK   │          │
+                &none      &none      &none      &none      &none                                &none       MC_L       MM_D       MC_R      &none
+        //   ╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
+        //                                    │          │          │          │   │          │   PGUP   │  PGDOWN  │
+                                                 &none      &none     &tog MOS        &none     &kp PG_UP  &kp PG_DN
         //                                    ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
       >;
     };       
