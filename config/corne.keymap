@@ -49,16 +49,22 @@
 #define HMLM(k1, k2, k3, k4) &hml LCTRL k1 &hml LALT  k2 &hml LGUI  k3 &hml LSHFT k4
 #define HMRM(k1, k2, k3, k4) &hmr RSHFT k1 &hmr RGUI  k2 &hmr RALT  k3 &hmr RCTRL k4
 
+#define COMBO_COPY  12 22
+#define COMBO_PASTE 13 23
+#define COMBO_CUT   11 21
+#define COMBO_UNDO  14 24
+#define COMBO_LANG   2 12
+
 #define WEN 0  // Win EN
 #define MEN 1  // Mac EN
 #define WRU 2  // Win RU
 #define MRU 3  // Mac RU
 #define NAV 4  // Navigation
-#define CLC 5  // Calc
+#define CLC 5  // Calculator
 #define SYM 6  // Symbols
-#define FUN 7  // Func
+#define FUN 7  // Functions
 #define GME 8  // Game
-#define GFN 9  // Game fn
+#define GAL 9  // Game Alt
 #define MOS 10 // Mouse
 
 #define COMBO_TIMEOUT 50
@@ -131,7 +137,7 @@
         // Win - Copy
         combo_win_copy {
             timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <2 3>;
+            key-positions = <COMBO_COPY>;
             bindings = <&kp WIN_COPY>;
             layers = <WEN WRU>;
             require-prior-idle-ms = <COMBO_IDLE>;
@@ -140,7 +146,7 @@
         // Win - Paste
         combo_win_paste {
             timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <2 4>;
+            key-positions = <COMBO_PASTE>;
             bindings = <&kp WIN_PASTE>;
             layers = <WEN WRU>;
             require-prior-idle-ms = <COMBO_IDLE>;
@@ -149,7 +155,7 @@
         // Win - Cut
         combo_win_cut {
             timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <1 4>;
+            key-positions = <COMBO_CUT>;
             bindings = <&kp WIN_CUT>;
             layers = <WEN WRU>;
             require-prior-idle-ms = <COMBO_IDLE>;
@@ -158,7 +164,7 @@
         // Win - Undo
         combo_win_undo {
             timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <1 2>;
+            key-positions = <COMBO_UNDO>;
             bindings = <&kp WIN_UNDO>;
             layers = <WEN WRU>;
             require-prior-idle-ms = <COMBO_IDLE>;
@@ -167,7 +173,7 @@
         // Win - Change language
         combo_win_lang {
             timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <22 23>;
+            key-positions = <COMBO_LANG>;
             bindings = <&lang WRU WIN_LANG>;
             layers = <WEN WRU>;
             require-prior-idle-ms = <COMBO_IDLE>;
@@ -176,7 +182,7 @@
         // Mac - Copy
         combo_mac_copy {
             timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <2 3>;
+            key-positions = <COMBO_COPY>;
             bindings = <&kp MAC_COPY>;
             layers = <MEN MRU>;
             require-prior-idle-ms = <COMBO_IDLE>;
@@ -185,7 +191,7 @@
         // Mac - Paste
         combo_mac_paste {
             timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <2 4>;
+            key-positions = <COMBO_PASTE>;
             bindings = <&kp MAC_PASTE>;
             layers = <MEN MRU>;
             require-prior-idle-ms = <COMBO_IDLE>;
@@ -194,7 +200,7 @@
         // Mac - Cut
         combo_mac_cut {
             timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <1 4>;
+            key-positions = <COMBO_CUT>;
             bindings = <&kp MAC_CUT>;
             layers = <MEN MRU>;
             require-prior-idle-ms = <COMBO_IDLE>;
@@ -203,7 +209,7 @@
         // Mac - Undo
         combo_mac_undo {
             timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <1 2>;
+            key-positions = <COMBO_UNDO>;
             bindings = <&kp MAC_UNDO>;
             layers = <MEN MRU>;
             require-prior-idle-ms = <COMBO_IDLE>;
@@ -212,7 +218,7 @@
         // Mac - Change language
         combo_mac_lang {
             timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <22 23>;
+            key-positions = <COMBO_LANG>;
             bindings = <&lang MRU MAC_LANG>;
             layers = <MEN MRU>;
             require-prior-idle-ms = <COMBO_IDLE>;
@@ -448,7 +454,7 @@
                 &kp ESC    &kp Z      &kp S      &kp C      &kp V                                &none      &none     &kp DOWN    &none      &none
         //   ╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
         //                                    │  CTRL    │  SPACE   │ GAME FN  │   │  BASE    │  SPACE   │  PTSCRN  │
-                                                &kp LCTRL  &kp SPACE  &mo GFN        &tog GME   &kp SPACE  &kp PSCRN
+                                                &kp LCTRL  &kp SPACE  &mo GAL        &tog GME   &kp SPACE  &kp PSCRN
         //                                    ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
       >;
     };
