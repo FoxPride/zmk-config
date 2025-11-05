@@ -1,88 +1,84 @@
 # zmk-config
 
 Config for [Chocofi](https://github.com/pashutk/chocofi) keyboard with 36 keys inspired by:
-- [Seniply](https://stevep99.github.io/seniply/)
+- [Seniply](https://stevep99.github.io/seniply)
+- [urob's config](https://github.com/urob/zmk-config)
 - [Wellum](https://github.com/braindefender/wellum)
 
 ## Layouts
 
-For English, [Gallium Rowstag](https://github.com/GalileoBlues/Gallium) (Gallium v2) is used, and for Russian I generated my layout with [oxeylyzer](https://github.com/o-x-e-y/oxeylyzer), taking into account the ideas from Wellum 
+- English - [Gallium Colstag](https://github.com/GalileoBlues/Gallium)
+- Russian - generated with [oxeylyzer](https://github.com/o-x-e-y/oxeylyzer)
 
 ## Learning layouts
 
-To study the layout, I recommend using:
-- [keybr](https://www.keybr.com/) - for memorizing
-- [monkeytype](https://monkeytype.com/) - further practice
+- [keybr](https://www.keybr.com/) - for memorization
+- [monkeytype](https://monkeytype.com/) - for further practice
 
 ## Layers
 
-- <kbd>NAV</kbd> for navigation
-- <kbd>CLC</kbd> for calculator
-- <kbd>SYM</kbd> for symbols
-- <kbd>FUN</kbd> for functional keys
-- <kbd>GME</kbd> for games
-
 > [!NOTE]
-> Each of the layers is activated by [Layer-Tap](https://zmk.dev/docs/keymaps/behaviors/hold-tap#layer-tap), except for the Game layer (activated by [Toggle layer](https://zmk.dev/docs/keymaps/behaviors/layers#toggle-layer))
+> Each layer is activated by [Layer-Tap](https://zmk.dev/docs/keymaps/behaviors/hold-tap#layer-tap), except for the Game and Mouse layers (activated by [Toggle Layer](https://zmk.dev/docs/keymaps/behaviors/layers#toggle-layer))
 
-## Base layer
+Icons legend:
+- ↻ [Key Repeat](https://zmk.dev/docs/keymaps/behaviors/key-repeat)
+- ␣ Space
+- ⌫ Backspace
+- ⌦ Delete
+- ⇥ Tab
+- ⌘ Gui
+- ⌥ Alt
+- ⌃ Ctrl
+- ⇧ Shift
 
-![](/images/base_layer.png)
+### Base
 
-Key: ⇥ Tab, ␣ Space, ⌫ Backspace, ⌦ Delete
+![](/images/base_layer_win.png)
+![](/images/base_layer_mac.png)
 
-> The only reason to use separate base layers for Windows and macOS is to open the corresponding navigation layer
+#### Highlights
+- Base layers are separated for Windows and macOS to support:
+	- basic operations (Copy, Paste, Cut, Undo)
+	- language switch
+	- home-row modifier order 
+- Rare letters in the Russian layout have been moved to combos 
+- [Timeless](https://zmk.dev/docs/keymaps/behaviors/hold-tap?examples=home_row_mods#custom-hold-tap-examples) home-row mods
 
-Some Russian letters have been moved to use via <kbd>Alt</kbd> + <kbd>Key</kbd> to accommodate everything: 
-
-|       Letter | Combination                   |
-| -----------: | :---------------------------- |
-| <kbd>Ъ</kbd> | <kbd>Alt</kbd> + <kbd>Ь</kbd> |
-| <kbd>Щ</kbd> | <kbd>Alt</kbd> + <kbd>Ш</kbd> |
-| <kbd>Ф</kbd> | <kbd>Alt</kbd> + <kbd>.</kbd> |
-| <kbd>Э</kbd> | <kbd>Alt</kbd> + <kbd>,</kbd> |
-| <kbd>Ё</kbd> | <kbd>Alt</kbd> + <kbd>Е</kbd> |
-
-## Navigation
+### Navigation
 
 ![](/images/navigation_layer.png)
 
-This layer gives us:
-- the most commonly used combinations (copy, paste, undo)
+#### Highlights
 - modifier keys with [Sticky Behavior](https://zmk.dev/docs/keymaps/behaviors/sticky-key)
-- switching between Bluetooth profiles (with appropriate select of Windows or macOS layers)
-- switching between languages
-- toggle Game layer
+- Bluetooth profile selection (with corresponding Windows or macOS layer)
+- Game/Mouse layer toggle 
+- **Delete** for left hand in mouse with keyboard situation
 
-> [!NOTE]
-> Caps Lock activates by pressing <kbd>Shift</kbd> + <kbd>LANG</kbd>
-
-### Windows and macOS differences
-
-- Home row mods are changed to be comfortable with usual combos (<kbd>Ctrl/GUI</kbd> + <kbd>Key</kbd>)
-- Most used combos use appropriate combinations
-- The combination for changing the language corresponds to the current OS
-
-## Calculator
+### Calculator
 
 ![](/images/calculator_layer.png)
 
-## Symbols
+### Symbols
 
 ![](/images/symbols_layer.png)
 
-## F-keys and functions
+### Functions
 
 ![](/images/functions_layer.png)
 
-## Game layer
+### Game
 
 ![](/images/game_layer.png)
 
-![](/images/functional_game_layer.png)
+![](/images/alt_game_layer.png)
 
-- <kbd>W</kbd> and <kbd>S</kbd> keys (as well as the arrow keys) have been shifted for comfortable use
-- <kbd>Tab</kbd> and <kbd>Shift</kbd> in familiar places
-- <kbd>Esc</kbd> added for pinky key position
-- <kbd>Ctrl</kbd> is moved to the thumb for ergonomics
-- The most used keys are present, additional keys have been moved to the functional game layer
+#### Highlights
+- <kbd>W</kbd> and <kbd>S</kbd> keys shifted downward (as well as arrow keys) for more comfortable use
+- <kbd>Tab</kbd> and <kbd>Shift</kbd> in their familiar positions
+- <kbd>Esc</kbd> added in the pinky position
+- <kbd>Ctrl</kbd> moved to the thumb for ergonomics
+- The most used keys are present, additional keys have been moved to the alternative game layer
+
+### Mouse
+
+![](/images/mouse_layer.png)
