@@ -4,25 +4,9 @@
  * SPDX-License-Identifier: MIT
  */
 
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 1500  // 600
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 200   // 10
-
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/pointing.h>
-
-#define MM_U &mmv MOVE_UP
-#define MM_D &mmv MOVE_DOWN
-#define MM_L &mmv MOVE_LEFT
-#define MM_R &mmv MOVE_RIGHT
-#define MS_U &msc SCRL_UP
-#define MS_D &msc SCRL_DOWN
-#define MS_L &msc SCRL_LEFT
-#define MS_R &msc SCRL_RIGHT
-#define MC_L &mkp LCLK
-#define MC_R &mkp RCLK
-#define MC_M &mkp MCLK
 
 #define PRV_TAB   &kp LC(LS(TAB)) 
 #define NXT_TAB   &kp LC(TAB)
@@ -38,9 +22,9 @@
 #define MAC_UNDO  LG(Z)
 #define MAC_LANG  LC(SPACE)
 
-#define KEYS_L 0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 // Left-hand keys.
-#define KEYS_R 5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 // Right-hand keys.
-#define THUMBS 30 31 32 33 34 35                       // Thumb keys.
+#define KEYS_L 0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 // Left-hand keys
+#define KEYS_R 5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 // Right-hand keys
+#define THUMBS 30 31 32 33 34 35                       // Thumb keys
 
 // Win modifiers
 #define HML(k1, k2, k3, k4)  &hml LGUI  k1 &hml LALT  k2 &hml LCTRL k3 &hml LSHFT k4
@@ -48,6 +32,16 @@
 // Mac modifiers
 #define HMLM(k1, k2, k3, k4) &hml LCTRL k1 &hml LALT  k2 &hml LGUI  k3 &hml LSHFT k4
 #define HMRM(k1, k2, k3, k4) &hmr RSHFT k1 &hmr RGUI  k2 &hmr RALT  k3 &hmr RCTRL k4
+// Hyper key
+#define HYP LS(LC(LA(LGUI)))
+// Meh key
+#define MEH LS(LC(LALT))
+
+#define COMBO_RU_HS  3  13
+#define COMBO_RU_SH  6  16
+#define COMBO_RU_YE  16 26
+#define COMBO_RU_YO  7  17
+#define COMBO_RU_EF  17 27
 
 #define COMBO_COPY  12 22
 #define COMBO_PASTE 13 23
@@ -65,11 +59,47 @@
 #define FUN 7  // Functions
 #define GME 8  // Game
 #define GAL 9  // Game Alt
-#define MOS 10 // Mouse
+#define TWM 10 // Tiling Window Manager
 
 #define COMBO_TIMEOUT 50
 #define COMBO_IDLE 75
 #define QUICK_TAP 150
+
+// Macro-generator for russian letter key combos
+#define RU_COMBO(NAME, KEYPOS, BIND) \
+    combo_ru_##NAME { \
+        timeout-ms = <COMBO_TIMEOUT>; \
+        key-positions = <KEYPOS>; \
+        bindings = <&kp BIND>; \
+        layers = <WRU MRU>; \
+	    require-prior-idle-ms = <COMBO_IDLE>; \
+    };
+
+// Macro-generator for basic OS combos
+#define OS_COMBO(NAME, KEYPOS, WIN_BIND, MAC_BIND) \
+    combo_##NAME##_win { \
+        timeout-ms = <COMBO_TIMEOUT>; \
+        key-positions = <KEYPOS>; \
+        bindings = <&kp WIN_BIND>; \
+        layers = <WEN WRU>; \
+	    require-prior-idle-ms = <COMBO_IDLE>; \
+    }; \
+    combo_##NAME##_mac { \
+        timeout-ms = <COMBO_TIMEOUT>; \
+        key-positions = <KEYPOS>; \
+        bindings = <&kp MAC_BIND>; \
+        layers = <MEN MRU>; \
+	    require-prior-idle-ms = <COMBO_IDLE>; \
+    };
+
+// Macro-generator for TWM layer
+#define TWM_MORPH(NAME, KEY) \
+    twm_##NAME: twm_##NAME { \
+        compatible = "zmk,behavior-mod-morph"; \
+        #binding-cells = <0>; \
+        bindings = <&kp LS(LC(LA(KEY)))>, <&kp LS(LC(LA(LG(KEY))))>; \
+        mods = <(MOD_RSFT)>; \
+    };
 
 &sk {
   quick-release;
@@ -89,86 +119,16 @@
     combos {
         compatible = "zmk,combos";
 
-        // Russian letter "Ъ"
-        combo_ru_hs {
-            timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <3 13>;
-            bindings = <&kp RBKT>;
-            layers = <WRU MRU>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
+		RU_COMBO(hs, COMBO_RU_HS, RBKT)  // Ъ
+		RU_COMBO(sh, COMBO_RU_SH, O)     // Щ
+		RU_COMBO(ye, COMBO_RU_YE, SQT)   // Э
+		RU_COMBO(yo, COMBO_RU_YO, GRAVE) // Ё
+		RU_COMBO(ef, COMBO_RU_EF, A)     // Ф
 
-        // Russian letter "Щ"
-        combo_ru_sh {
-            timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <6 16>;
-            bindings = <&kp O>;
-            layers = <WRU MRU>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        // Russian letter "Э"
-        combo_ru_e {
-            timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <16 26>;
-            bindings = <&kp SQT>;
-            layers = <WRU MRU>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        // Russian letter "Ё"
-        combo_ru_yo {
-            timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <7 17>;
-            bindings = <&kp GRAVE>;
-            layers = <WRU MRU>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        // Russian letter "Ф"
-        combo_ru_f {
-            timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <17 27>;
-            bindings = <&kp A>;
-            layers = <WRU MRU>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        // Win - Copy
-        combo_win_copy {
-            timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <COMBO_COPY>;
-            bindings = <&kp WIN_COPY>;
-            layers = <WEN WRU>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        // Win - Paste
-        combo_win_paste {
-            timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <COMBO_PASTE>;
-            bindings = <&kp WIN_PASTE>;
-            layers = <WEN WRU>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        // Win - Cut
-        combo_win_cut {
-            timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <COMBO_CUT>;
-            bindings = <&kp WIN_CUT>;
-            layers = <WEN WRU>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        // Win - Undo
-        combo_win_undo {
-            timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <COMBO_UNDO>;
-            bindings = <&kp WIN_UNDO>;
-            layers = <WEN WRU>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
+		OS_COMBO(copy,  COMBO_COPY,  WIN_COPY,  MAC_COPY)
+		OS_COMBO(paste, COMBO_PASTE, WIN_PASTE, MAC_PASTE)
+        OS_COMBO(cut,   COMBO_CUT,   WIN_CUT,   MAC_CUT)
+        OS_COMBO(undo,  COMBO_UNDO,  WIN_UNDO,  MAC_UNDO)
 
         // Win - Change language
         combo_win_lang {
@@ -176,42 +136,6 @@
             key-positions = <COMBO_LANG>;
             bindings = <&lang WRU WIN_LANG>;
             layers = <WEN WRU>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-		
-        // Mac - Copy
-        combo_mac_copy {
-            timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <COMBO_COPY>;
-            bindings = <&kp MAC_COPY>;
-            layers = <MEN MRU>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        // Mac - Paste
-        combo_mac_paste {
-            timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <COMBO_PASTE>;
-            bindings = <&kp MAC_PASTE>;
-            layers = <MEN MRU>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        // Mac - Cut
-        combo_mac_cut {
-            timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <COMBO_CUT>;
-            bindings = <&kp MAC_CUT>;
-            layers = <MEN MRU>;
-            require-prior-idle-ms = <COMBO_IDLE>;
-        };
-
-        // Mac - Undo
-        combo_mac_undo {
-            timeout-ms = <COMBO_TIMEOUT>;
-            key-positions = <COMBO_UNDO>;
-            bindings = <&kp MAC_UNDO>;
-            layers = <MEN MRU>;
             require-prior-idle-ms = <COMBO_IDLE>;
         };
 
@@ -289,6 +213,15 @@
             bindings = <&mo>, <&key_repeat>;
 			quick-tap-ms = <QUICK_TAP>;
         };
+
+		TWM_MORPH(h, H)
+		TWM_MORPH(j, J)
+		TWM_MORPH(k, K)
+		TWM_MORPH(l, L)
+		TWM_MORPH(left, LEFT)
+		TWM_MORPH(down, DOWN)
+		TWM_MORPH(up, UP)
+		TWM_MORPH(right, RIGHT)
     };
 };
 
@@ -301,7 +234,7 @@
       bindings = <
         //   ╭──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //   │  B       │  L       │  D       │  C       │  V       │                         │  J       │  Y       │  O       │  U       │  ,       │
-                &kp B      &kp L      &kp D      &kp C      &kp V                                &kp J      &kp Y      &kp O      &kp U     &kp COMMA
+                &kp B      &kp L     &lt TWM D   &kp C      &kp V                                &kp J      &kp Y     &lt TWM O   &kp U     &kp COMMA
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │  N       │  R       │  T       │  S       │  G       │                         │  P       │  H       │  A       │  E       │  I       │
                 HML (N,    R,         T,         S)         &kp G                                &kp P      HMR(H,     A,         E,         I)
@@ -337,7 +270,7 @@
       bindings = <
         //   ╭──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //   │  Ц       │  Й       │  К       │  Ь       │  Ч       │                         │  Ш       │  .       │  И       │  Я       │  Ю       │
-                &kp W      &kp Q      &kp R      &kp M      &kp X                                &kp I     &kp FSLH    &kp B      &kp Z      &kp DOT
+                &kp W      &kp Q     &lt TWM R   &kp M      &kp X                                &kp I     &kp FSLH   &lt TWM B   &kp Z      &kp DOT
         //   ├──────────┼──────────┼──────────┼───(Ъ)────┼──────────┤                         ├──────────┼───(Щ)────┼───(Ё)────┼──────────┼──────────┤
         //   │  Т       │  Р       │  Н       │  В       │  М       │                         │  ,       │  С       │  А       │  О       │  Е       │
                 HML (N,    H,         Y,         D)         &kp V                               &kp QMARK   HMR(C,     F,         J,         T)
@@ -355,7 +288,7 @@
       bindings = <
         //   ╭──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //   │  Ц       │  Й       │  К       │  Ь       │  Ч       │                         │  Ш       │  .       │  И       │  Я       │  Ю       │
-                &kp W      &kp Q      &kp R      &kp M      &kp X                                &kp I     &kp FSLH    &kp B      &kp Z      &kp DOT
+                &kp W      &kp Q     &lt TWM R   &kp M      &kp X                                &kp I     &kp FSLH   &lt TWM B   &kp Z      &kp DOT
         //   ├──────────┼──────────┼──────────┼───(Ъ)────┼──────────┤                         ├──────────┼───(Щ)────┼───(Ё)────┼──────────┼──────────┤
         //   │  Т       │  Р       │  Н       │  В       │  М       │                         │  ,       │  С       │  А       │  О       │  Е       │
                 HMLM (N,   H,         Y,         D)         &kp V                               &kp QMARK   HMRM(C,    F,         J,         T)
@@ -381,8 +314,8 @@
         //   │  BT 0    │  BT 1    │  BT 2    │  BT 3    │ BT CLEAR │                         │  INSERT  │  PTSCRN  │  ↓       │  PAUSE   │          │
            &sel 0 WEN &sel 1 MEN &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR                            &kp INS  &kp PSCRN &kp DOWN &kp PAUSE_BREAK &none
         //   ╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
-        //                                    │  GAME    │  X       │  MOUSE   │   │  SHIFT   │  BkSPC   │  DEL     │
-                                                &tog GME    &none     &tog MOS        &trans    &kp BSPC    &kp DEL
+        //                                    │  GAME    │  X       │          │   │  SHIFT   │  BkSPC   │  DEL     │
+                                                &tog GME    &none     &none           &trans    &kp BSPC    &kp DEL
         //                                    ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
       >;
     };                
@@ -397,7 +330,7 @@
                &sk LGUI   &sk LALT   &sk LCTRL  &sk LSHFT   &none                               &kp EQUAL   &kp N4     &kp N5     &kp N6    &kp MINUS
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //   │          │          │          │          │          │                         │  0       │  1       │  2       │  3       │  /       │
-                &none      &none      &none      &none      &none                                &kp N0     &kp N1     &kp N2     &kp N3    &kp FSLH
+                &none      &none     &sk MEH    &sk HYP     &none                                &kp N0     &kp N1     &kp N2     &kp N3    &kp FSLH
         //   ╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
         //                                    │  X       │          │          │   │          │  BkSPC   │  DEL     │
                                                  &none      &none      &none          &none     &kp BSPC    &kp DEL
@@ -477,22 +410,22 @@
       >;
     };       
 
-    mouse_layer {
+    twm_layer {
       bindings = <
         //   ╭──────────┬──────────┬──────────┬──────────┬──────────╮                         ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //   │          │          │          │          │          │                         │          │ SCRL UP  │   MCLK   │ SCRL DWN │          │
-                &none      &none      &none      &none      &none                                &none       MS_U       MC_M       MS_D      &none
+        //   │          │          │  X       │          │          │                         │          │          │  X       │          │          │
+                &none      &none      &none      &none      &none                                &none      &none      &none      &none      &none
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //   │          │          │          │          │          │                         │ SCRL LFT │ MOVE LFT │  MOVE UP │ MOVE RHT │ SCRL RHT │
-                &none      &none      &none      &none      &none                                 MS_L       MM_L       MM_U       MM_R       MS_R
+        //   │          │  ← (H)   │  ↑ (K)   │  → (L)   │          │                         │          │  ←       │  ↑       │  →       │          │
+                &none      &twm_h     &twm_k     &twm_l     &none                                &none     &twm_left  &twm_up   &twm_right   &none
         //   ├──────────┼──────────┼──────────┼──────────┼──────────┤                         ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //   │          │          │          │          │          │                         │          │   LCLK   │ MOVE DWN │   RCLK   │          │
-                &none      &none      &none      &none      &none                                &none       MC_L       MM_D       MC_R      &none
+        //   │          │          │  ↓ (J)   │          │          │                         │          │          │  ↓       │          │          │
+                &none      &none      &twm_j     &none      &none                                &none     &none      &twm_down   &none      &none
         //   ╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────╮   ╭──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
-        //                                    │          │          │          │   │          │   PGUP   │  PGDOWN  │
-                                                 &none      &none     &tog MOS        &none     &kp PG_UP  &kp PG_DN
+        //                                    │          │          │          │   │  SHIFT   │          │          │
+                                                 &none      &none      &none         &kp RSHFT   &none      &none
         //                                    ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
       >;
-    };       
+    };                
   };
 };
